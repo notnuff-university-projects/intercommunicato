@@ -4,6 +4,7 @@ project(lab5)
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(Threads REQUIRED)
+find_package(MPI REQUIRED)
 
 file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
@@ -18,6 +19,8 @@ file(GLOB_RECURSE COMPILATION_UNITS CONFIGURE_DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
 )
 
-add_executable(lab2 ${COMPILATION_UNITS} ${HEADERS})
+add_executable(lab5 ${COMPILATION_UNITS} ${HEADERS})
 
-target_link_libraries(lab2 PRIVATE Threads::Threads)
+target_link_libraries(lab5 PRIVATE Threads::Threads MPI::MPI_CXX)
+target_include_directories(lab5 PUBLIC ${MPI_CXX_INCLUDE_PATH})
+
