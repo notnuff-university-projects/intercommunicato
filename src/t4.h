@@ -9,8 +9,8 @@ public:
 
 protected:
     virtual void input() override;
-    virtual void after_compute_t_sync() override;
-    virtual void after_compute_An_sync() override;
+
+    TMatrix MR;
 };
 
 #endif // T4_H 

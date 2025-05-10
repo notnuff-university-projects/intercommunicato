@@ -9,10 +9,6 @@ public:
 
 protected:
     virtual void execute() override;
-
-    virtual void input() override;
-    virtual void after_compute_t_sync() override;
-    virtual void after_compute_An_sync() override;
 };
 
 #endif // T3_H 
