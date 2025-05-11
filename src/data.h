@@ -8,13 +8,18 @@
 #include <semaphore>
 
 using TVector = std::vector<int>;
-using TMatrix = std::vector<TVector>;
+using TMatrix = std::vector<int>;
 
 class Data {
 public:
     Data();
     ~Data();
 
+public:
+    void fillRandomVector(TVector &vec);
+    void fillRandomMatrix(TMatrix &mat);
+
+public:
     // Допоміжні методи
     // Використовуємо для B * MV[i] та для MM[i]*MC[i]
     static const int multiplyVectorByVector(const TVector& v1, const TVector& v2);
@@ -31,7 +36,6 @@ public:
 
     // Використовуємо для e*X
     static TMatrix multiplyByScalar(const TMatrix& v, int s);
-    static TVector multiplyByScalar(const TVector& v, int s);
 
 
 public:
@@ -40,7 +44,9 @@ public:
 public:
     const int N = 1000;  // Розмірність векторів та матриць
     const int P = 4;     // Кількість потоків
-    int H;         // Розмір частини для кожного потоку
+    const int quarterN = N / P;
+    const int quarterNxN = N * N / P;
+    const int NxN = N * N;
 
 protected:
     // Генератор випадкових чисел

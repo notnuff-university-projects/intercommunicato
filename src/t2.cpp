@@ -1,25 +1,45 @@
 #include "t2.h"
 #include <iostream>
+#include <mpi.h>
 #include <semaphore>
 
-T2::T2(Data& data) : ThreadBase(data, data.H, 2 * data.H - 1) {}
+T2::T2(Data& data) : ThreadBase(data) {}
 
-void T2::input() {
+void T2::createInput() {
     std::cout << "T2: Введення MX, MZ" << std::endl;
 
-    // Ініціалізація MX
-    MX.resize(data.N, std::vector<int>(data.N));
-    for (int i = 0; i < data.N; ++i) {
-        for (int j = 0; j < data.N; ++j) {
-            MX[i][j] = data.GetRandomNumber();
-        }
-    }
+    data.fillRandomMatrix(MX);
+    data.fillRandomMatrix(MZ);
+}
 
-    // Ініціалізація MZ
-    MZ.resize(data.N, std::vector<int>(data.N));
-    for (int i = 0; i < data.N; ++i) {
-        for (int j = 0; j < data.N; ++j) {
-            MZ[i][j] = data.GetRandomNumber();
-        }
-    }
+void T2::sendInput() {
+    MPI_Send(MX.data() + data.quarterN * 0, data.quarterNxN, MPI_INT, 0, 1, MPI_COMM_WORLD);
+    // MPI_Send(MX.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
+    // MPI_Send(MX.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 1, MPI_COMM_WORLD);
+
+    MPI_Send(MZ.data() + data.quarterN * 0, data.quarterNxN, MPI_INT, 0, 2, MPI_COMM_WORLD);
+    // MPI_Send(MZ.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 2, MPI_COMM_WORLD);
+    // MPI_Send(MZ.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 2, MPI_COMM_WORLD);
+
+    int i = 0;
+    while(0==i) sleep(5);
+}
+
+void T2::receiveOthersInput() {
+    // алокуємо пам'ять для буферів
+    Cn2.resize(data.quarterN); MD.resize(data.NxN);
+    MR.resize(data.NxN);
+
+    // отримуємо дані з інших потоків
+    MPI_Recv(Cn2.data(), data.quarterNxN, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(MD.data(), data.NxN, MPI_INT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    // MPI_Recv(MR.data(), data.N, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+    int i = 0;
+    while(0==i) sleep(5);
+
+}
+
+void T2::syncInput() {
+    MPI_Barrier(MPI_COMM_WORLD);
 }

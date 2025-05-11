@@ -8,10 +8,22 @@ public:
     explicit T2(Data& data);
 
 protected:
-    virtual void input() override;
+    void createInput() override;
 
+protected:
+    void sendInput() override;
+    void receiveOthersInput() override;
+
+protected:
+    void syncInput() override;
+
+protected:
+    // input
     TMatrix MX, MZ;
-    TMatrix MA;
+
+    // input from other threads
+    TVector Cn2; TMatrix MD;
+    TMatrix MR;
 };
 
-#endif // T2_H 
+#endif // T2_H

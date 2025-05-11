@@ -21,6 +21,6 @@ file(GLOB_RECURSE COMPILATION_UNITS CONFIGURE_DEPENDS
 
 add_executable(lab5 ${COMPILATION_UNITS} ${HEADERS})
 
-target_link_libraries(lab5 PRIVATE Threads::Threads MPI::MPI_CXX)
+target_link_libraries(lab5 PRIVATE MPI::MPI_CXX)
 target_include_directories(lab5 PUBLIC ${MPI_CXX_INCLUDE_PATH})
 

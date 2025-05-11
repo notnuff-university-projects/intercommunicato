@@ -8,10 +8,20 @@ public:
     explicit T1(Data& data);
 
 protected:
-    virtual void input() override;
+    void createInput() override;
 
+protected:
+    void sendInput() override;
+    void receiveOthersInput() override;
+
+protected:
+    // input
     TVector C;
     TMatrix MD;
+
+    // input from other threads
+    TMatrix MXn1, MZn1;
+    TMatrix MR;
 };
 
 #endif // T1_H 

@@ -8,7 +8,20 @@ public:
     explicit T3(Data& data);
 
 protected:
-    virtual void execute() override;
+    virtual void createInput();
+
+protected:
+    virtual void sendInput();
+    virtual void receiveOthersInput();
+
+protected:
+    virtual void syncInput();
+
+protected:
+    // input from other threads
+    TVector Cn3; TMatrix MD;
+    TMatrix MX3, MZ3;
+    TMatrix MR;
 };
 
-#endif // T3_H 
+#endif // T3_H

@@ -8,9 +8,22 @@ public:
     explicit T4(Data& data);
 
 protected:
-    virtual void input() override;
+    virtual void createInput();
 
+protected:
+    virtual void sendInput();
+    virtual void receiveOthersInput();
+
+protected:
+    virtual void syncInput();
+
+protected:
+    // input
     TMatrix MR;
+
+    // input from other threads
+    TVector Cn4; TMatrix MD;
+    TMatrix MXn4, MZn4;
 };
 
-#endif // T4_H 
+#endif // T4_H

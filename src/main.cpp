@@ -42,20 +42,19 @@ int main(int argc, char** argv) {
         case 1:
             currentThread = std::make_unique<T2>(data);
             break;
-        case 2:
-            currentThread = std::make_unique<T3>(data);
-            break;
-        case 3:
-            currentThread = std::make_unique<T4>(data);
-            break;
+        // case 2:
+        //     currentThread = std::make_unique<T3>(data);
+        //     break;
+        // case 3:
+        //     currentThread = std::make_unique<T4>(data);
+        //     break;
         default:
             std::cerr << "Wrong rank!\n";
             return EXIT_FAILURE;
 
     }
 
-    currentThread->start();
-    currentThread->join();
+    currentThread->run();
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
