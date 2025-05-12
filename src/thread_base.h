@@ -2,22 +2,31 @@
 #define THREAD_BASE_H
 
 #include "data.h"
-#include "tthread.h"
 
-class ThreadBase : public TThread {
+class ThreadBase {
 protected:
     Data& data;
-    int from;
-    int to;
 
 public:
-    ThreadBase(Data& data, int from, int to);
+    explicit ThreadBase(Data& data);
     virtual ~ThreadBase() = default;
 
 public:
-    virtual void run_thread() override;
+    virtual void run();
 
 protected:
+    void inputStage();
+
+protected:
+    virtual void createInput();
+
+protected:
+    virtual void sendInput();
+    virtual void receiveOthersInput();
+
+protected:
+    virtual void syncInput();
+
 };
 
 #endif // THREAD_BASE_H 
