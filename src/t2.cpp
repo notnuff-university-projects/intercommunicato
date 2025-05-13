@@ -20,21 +20,18 @@ void T2::sendAndReceiveInput() {
     // отримуємо дані з інших потоків
     MPI_Recv(Cn2.data(), data.quarterNxN, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Recv(MD.data(), data.NxN, MPI_INT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    // MPI_Recv(MR.data(), data.N, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-    std::cout << "T2: sent: " << MX[0] << std::endl;
-
 
     MPI_Send(MX.data() + data.quarterN * 0, data.quarterNxN, MPI_INT, 0, 1, MPI_COMM_WORLD);
-    // MPI_Send(MX.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
-    // MPI_Send(MX.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 1, MPI_COMM_WORLD);
+    MPI_Send(MX.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
+    MPI_Send(MX.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 1, MPI_COMM_WORLD);
 
     MPI_Send(MZ.data() + data.quarterN * 0, data.quarterNxN, MPI_INT, 0, 2, MPI_COMM_WORLD);
-    // MPI_Send(MZ.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 2, MPI_COMM_WORLD);
-    // MPI_Send(MZ.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 2, MPI_COMM_WORLD);
+    MPI_Send(MZ.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 2, MPI_COMM_WORLD);
+    MPI_Send(MZ.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 2, MPI_COMM_WORLD);
 
-    std::cout << "T2: received: " << Cn2[0] << std::endl;
+    MPI_Recv(MR.data(), data.N, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
+    std::cout << "T2: received MD: " << MD[0] << std::endl;
 }
 
 void T2::syncInput() {

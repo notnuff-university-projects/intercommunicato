@@ -8,19 +8,13 @@ public:
     explicit T3(Data& data);
 
 protected:
-    virtual void createInput();
-
-protected:
-    virtual void sendAndRecieveInput();
-    virtual void receiveOthersInput();
-
-protected:
-    virtual void syncInput();
+    void sendAndReceiveInput() override;
+    void syncInput() override;
 
 protected:
     // input from other threads
     TVector Cn3; TMatrix MD;
-    TMatrix MX3, MZ3;
+    TMatrix MXn3, MZn3;
     TMatrix MR;
 };
 

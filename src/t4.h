@@ -8,14 +8,11 @@ public:
     explicit T4(Data& data);
 
 protected:
-    virtual void createInput();
+    void createInput() override;
 
 protected:
-    virtual void sendAndRecieveInput();
-    virtual void receiveOthersInput();
-
-protected:
-    virtual void syncInput();
+    void sendAndReceiveInput() override;
+    void syncInput() override;
 
 protected:
     // input

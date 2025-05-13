@@ -35,6 +35,12 @@ int main(int argc, char** argv) {
     auto start = std::chrono::high_resolution_clock::now();
 
     std::unique_ptr<ThreadBase> currentThread;
+
+    if (world_size != 4) {
+        std::cerr << "Wrong number of processes!\n";
+        return EXIT_FAILURE;
+    }
+
     switch (world_rank) {
         case 0:
             currentThread = std::make_unique<T1>(data);
@@ -42,14 +48,14 @@ int main(int argc, char** argv) {
         case 1:
             currentThread = std::make_unique<T2>(data);
             break;
-        // case 2:
-        //     currentThread = std::make_unique<T3>(data);
-        //     break;
-        // case 3:
-        //     currentThread = std::make_unique<T4>(data);
-        //     break;
+        case 2:
+            currentThread = std::make_unique<T3>(data);
+            break;
+        case 3:
+            currentThread = std::make_unique<T4>(data);
+            break;
         default:
-            std::cerr << "Wrong rank!\n";
+            std::cerr << "Wrong rank: " << world_rank << "\n";
             return EXIT_FAILURE;
 
     }
