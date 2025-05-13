@@ -6,8 +6,6 @@
 T2::T2(Data& data) : ThreadBase(data) {}
 
 void T2::createInput() {
-    std::cout << "T2: Введення MX, MZ" << std::endl;
-
     data.fillRandomMatrix(MX);
     data.fillRandomMatrix(MZ);
 }
@@ -29,7 +27,7 @@ void T2::sendAndReceiveInput() {
     MPI_Send(MZ.data() + data.quarterN * 2, data.quarterNxN, MPI_INT, 2, 2, MPI_COMM_WORLD);
     MPI_Send(MZ.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 2, MPI_COMM_WORLD);
 
-    MPI_Recv(MR.data(), data.N, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(MR.data(), data.NxN, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     std::cout << "T2: received MD: " << MD[0] << std::endl;
 }

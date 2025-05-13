@@ -6,8 +6,6 @@
 T1::T1(Data& data) : ThreadBase(data) {}
 
 void T1::createInput() {
-    std::cout << "T1: Введення C, MD" << std::endl;
-
     data.fillRandomVector(C);
     data.fillRandomMatrix(MD);
 }
@@ -35,7 +33,7 @@ void T1::sendAndReceiveInput() {
     // отримуємо дані з інших потоків
     MPI_Recv(MXn1.data(), data.quarterNxN, MPI_INT, 1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Recv(MZn1.data(), data.quarterNxN, MPI_INT, 1, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    MPI_Recv(MR.data(), data.N, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(MR.data(), data.NxN, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     std::cout << "T1: send MD: " << MD[0] << std::endl;
     std::cout << "T1: received MR: " << MR[0] << std::endl;

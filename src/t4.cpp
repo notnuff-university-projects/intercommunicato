@@ -21,9 +21,9 @@ void T4::sendAndReceiveInput() {
     MPI_Recv(MXn4.data(), data.quarterNxN, MPI_INT, 1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Recv(MZn4.data(), data.quarterNxN, MPI_INT, 1, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-    MPI_Send(MR.data() + data.NxN, data.quarterNxN, MPI_INT, 0, 1, MPI_COMM_WORLD);
-    MPI_Send(MR.data() + data.NxN, data.quarterNxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
-    MPI_Send(MR.data() + data.NxN, data.quarterNxN, MPI_INT, 3, 1, MPI_COMM_WORLD);
+    MPI_Send(MR.data(), data.NxN, MPI_INT, 0, 1, MPI_COMM_WORLD);
+    MPI_Send(MR.data(), data.NxN, MPI_INT, 1, 1, MPI_COMM_WORLD);
+    MPI_Send(MR.data(), data.NxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
 
 
     std::cout << "T4: send MR: " << MR[0] << std::endl;

@@ -10,6 +10,7 @@ void ThreadBase::run() {
 
 void ThreadBase::inputStage() {
     createInput();
+
     sendAndReceiveInput();
     syncInput();
 }
