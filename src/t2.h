@@ -11,8 +11,7 @@ protected:
     void createInput() override;
 
 protected:
-    void sendInput() override;
-    void receiveOthersInput() override;
+    void sendAndReceiveInput() override;
 
 protected:
     void syncInput() override;

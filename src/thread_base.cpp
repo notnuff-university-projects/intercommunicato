@@ -10,16 +10,13 @@ void ThreadBase::run() {
 
 void ThreadBase::inputStage() {
     createInput();
-    sendInput();
-    receiveOthersInput();
+    sendAndReceiveInput();
     syncInput();
 }
 
 void ThreadBase::createInput() {}
 
-void ThreadBase::sendInput() {}
-
-void ThreadBase::receiveOthersInput() {}
+void ThreadBase::sendAndReceiveInput() {}
 
 void ThreadBase::syncInput() {
     MPI_Barrier(MPI_COMM_WORLD);

@@ -21,8 +21,7 @@ protected:
     virtual void createInput();
 
 protected:
-    virtual void sendInput();
-    virtual void receiveOthersInput();
+    virtual void sendAndReceiveInput();
 
 protected:
     virtual void syncInput();
