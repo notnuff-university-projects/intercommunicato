@@ -9,7 +9,9 @@ public:
 
 protected:
     void sendAndReceiveInput() override;
-    void syncInput() override;
+
+protected:
+    int computeLocalT() override;
 
 protected:
     // input from other threads

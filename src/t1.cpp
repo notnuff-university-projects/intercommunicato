@@ -3,7 +3,9 @@
 #include <mpi.h>
 #include <semaphore>
 
-T1::T1(Data& data) : ThreadBase(data) {}
+T1::T1(Data& data) : ThreadBase(data) {
+    name = "T1";
+}
 
 void T1::createInput() {
     data.fillRandomVector(C);
@@ -40,6 +42,7 @@ void T1::sendAndReceiveInput() {
 
 }
 
-void T1::syncInput() {
-    MPI_Barrier(MPI_COMM_WORLD);
+int T1::computeLocalT() {
+    return Data::minElement(C.begin(), C.begin() + data.quarterN);
 }
+

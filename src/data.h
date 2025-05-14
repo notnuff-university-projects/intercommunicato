@@ -38,6 +38,8 @@ public:
     static TMatrix multiplyByScalar(const TMatrix& v, int s);
 
 
+    static int minElement(TVector::iterator begin, TVector::iterator end);
+
 public:
     int GetRandomNumber();
 

@@ -16,16 +16,19 @@ public:
 
 protected:
     void inputStage();
-
-protected:
     virtual void createInput();
-
-protected:
     virtual void sendAndReceiveInput();
-
-protected:
     virtual void syncInput();
 
+protected:
+    void computeT();
+    virtual int computeLocalT() = 0;
+    void computeGlobalT(int localT);
+    void syncT();
+
+protected:
+    int t = std::numeric_limits<int>::max();
+    std::string name;
 };
 
-#endif // THREAD_BASE_H 
+#endif // THREAD_BASE_H

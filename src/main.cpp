@@ -67,5 +67,6 @@ int main(int argc, char** argv) {
 
     std::cout << "Час виконання: " << duration.count() << " мс" << std::endl;
 
+    MPI_Finalize();
     return 0;
 }

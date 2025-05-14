@@ -3,7 +3,9 @@
 #include <mpi.h>
 #include <semaphore>
 
-T4::T4(Data& data) : ThreadBase(data) {}
+T4::T4(Data& data) : ThreadBase(data) {
+    name = "T4";
+}
 
 void T4::createInput() {
     data.fillRandomMatrix(MR);
@@ -30,6 +32,6 @@ void T4::sendAndReceiveInput() {
     std::cout << "T4: received MD: " << MD[0] << std::endl;
 }
 
-void T4::syncInput() {
-    MPI_Barrier(MPI_COMM_WORLD);
+int T4::computeLocalT() {
+    return Data::minElement(Cn4.begin(), Cn4.end());
 }

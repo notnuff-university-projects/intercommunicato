@@ -1,4 +1,6 @@
 #include "data.h"
+
+#include <algorithm>
 #include <climits>
 #include <iostream>
 #include <semaphore>
@@ -6,7 +8,7 @@
 Data::Data() {
     // Ініціалізація генератора випадкових чисел
     gen.seed(std::time(nullptr));
-    dist = std::uniform_int_distribution<int>(0, 99);
+    dist = std::uniform_int_distribution<int>(1, 9999);
 }
 
 Data::~Data() {}
@@ -137,6 +139,11 @@ TVector Data::addVectors(const TVector& v1, const TVector& v2) {
 //     return result;
 // }
 
+int Data::minElement(const TVector::iterator begin, const TVector::iterator end) {
+    const auto min = std::ranges::min_element(begin, end);
+    std::cout << "MIN: " << *min << " " << *begin << " " << *end << std::endl;
+    return *min;
+}
 int Data::GetRandomNumber() {
     return dist(gen);
 }

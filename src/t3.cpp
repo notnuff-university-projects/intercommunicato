@@ -3,7 +3,9 @@
 #include <mpi.h>
 #include <semaphore>
 
-T3::T3(Data& data) : ThreadBase(data) {}
+T3::T3(Data& data) : ThreadBase(data) {
+    name = "T3";
+}
 
 void T3::sendAndReceiveInput() {
     // алокуємо пам'ять для буферів
@@ -22,6 +24,6 @@ void T3::sendAndReceiveInput() {
     std::cout << "T3: received MD: " << MD[0] << std::endl;
 }
 
-void T3::syncInput() {
-    MPI_Barrier(MPI_COMM_WORLD);
+int T3::computeLocalT() {
+    return Data::minElement(Cn3.begin(), Cn3.end());
 }

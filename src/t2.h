@@ -9,12 +9,10 @@ public:
 
 protected:
     void createInput() override;
-
-protected:
     void sendAndReceiveInput() override;
 
 protected:
-    void syncInput() override;
+    int computeLocalT() override;
 
 protected:
     // input
