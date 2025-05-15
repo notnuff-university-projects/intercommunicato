@@ -21,24 +21,20 @@ public:
 
 public:
     // Допоміжні методи
-    // Використовуємо для B * MV[i] та для MM[i]*MC[i]
-    static const int multiplyVectorByVector(const TVector& v1, const TVector& v2);
 
-    // Використовуємо для отримання A[from, to]
     static TVector addVectors(const TVector& v1, const TVector& v2);
-
-    // Використовуємо для B * MV[from, to]
-    static TVector multiplyVectorByMatrixRange(const TVector& v1, const TMatrix& m, int from, int to);
-    static TVector multiplyVectorByMatrixPart(const TVector& v, const TMatrix& m);
-
-    // Використовуємо для MM*MC[from, to]
-    static std::vector<TVector> multiplyMatrixByMatrixRange(const TMatrix& v1, const TMatrix& m, int from, int to);
-
-    // Використовуємо для e*X
-    static TMatrix multiplyByScalar(const TMatrix& v, int s);
-
-
     static int minElement(TVector::iterator begin, TVector::iterator end);
+
+    // оскільки
+    TMatrix multiplyMatrixPartByMatrix(const TMatrix &matPart, const TMatrix &mat);
+    static void subtractMatrixPartByMatrixPart(TMatrix &target, const TMatrix &subtractor);
+
+    template<typename T>
+    static void multiplyByScalar(T& container, int value) {
+        for(auto it = container.begin(); it != container.end(); ++it) {
+            *it *= value;
+        }
+    }
 
 public:
     int GetRandomNumber();

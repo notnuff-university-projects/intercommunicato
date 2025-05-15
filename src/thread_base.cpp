@@ -42,3 +42,27 @@ void ThreadBase::computeGlobalT(int localT) {
 void ThreadBase::syncT() {
     MPI_Barrier(MPI_COMM_WORLD);
 }
+
+void ThreadBase::computeMAn() {
+    calculateMAnLocal();
+    sendMAn();
+}
+
+void ThreadBase::calculateAndStashMAnLocal(
+    const TMatrix &MXnLocal,
+    const TMatrix &MR,
+    int t,
+    const TMatrix &MZnLocal,
+    const TMatrix &MD)
+{
+    auto leftPart = data.multiplyMatrixPartByMatrix(MXnLocal, MR);
+    auto rightPart = data.multiplyMatrixPartByMatrix(MZnLocal, MD);
+
+    Data::multiplyByScalar(rightPart, t);
+    Data::subtractMatrixPartByMatrixPart(leftPart, rightPart);
+    MAnLocal = std::move(leftPart);
+}
+
+void ThreadBase::sendMAn() {
+
+}

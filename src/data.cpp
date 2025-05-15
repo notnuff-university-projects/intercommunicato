@@ -144,6 +144,15 @@ int Data::minElement(const TVector::iterator begin, const TVector::iterator end)
     std::cout << "MIN: " << *min << " " << *begin << " " << *end << std::endl;
     return *min;
 }
+
+TMatrix Data::multiplyMatrixPartByMatrix(const TMatrix &matPart, const TMatrix &mat) {
+
+}
+
+void Data::subtractMatrixPartByMatrixPart(TMatrix &target, const TMatrix &subtractor) {
+
+}
+
 int Data::GetRandomNumber() {
     return dist(gen);
 }

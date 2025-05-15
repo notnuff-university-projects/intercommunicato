@@ -15,6 +15,9 @@ protected:
     int computeLocalT() override;
 
 protected:
+    void computeMAn();
+
+protected:
     // input
     TVector C;
     TMatrix MD;

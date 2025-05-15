@@ -27,8 +27,24 @@ protected:
     void syncT();
 
 protected:
+    virtual void computeMAn();
+
+    virtual void calculateMAnLocal() = 0;
+    void calculateAndStashMAnLocal(
+        const TMatrix& MXnLocal,
+        const TMatrix& MR,
+        int t,
+        const TMatrix& MZnLocal,
+        const TMatrix& MD
+        );
+
+    void sendMAn();
+
+protected:
     int t = std::numeric_limits<int>::max();
     std::string name;
+
+    TMatrix MAnLocal;
 };
 
 #endif // THREAD_BASE_H
