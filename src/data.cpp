@@ -146,7 +146,20 @@ int Data::minElement(const TVector::iterator begin, const TVector::iterator end)
 }
 
 TMatrix Data::multiplyMatrixPartByMatrix(const TMatrix &matPart, const TMatrix &mat) {
+    TMatrix result;
+    result.resize(matPart.size());
 
+    auto rowsNum = matPart.size() / N;
+    for (int row = 0; row < rowsNum; ++row) {
+        auto rowBegin = N * row;
+        for (auto column = 0; column < N; ++column) {
+            for (auto i = 0; i < N; ++i) {
+                result[row * N + column] = matPart[rowBegin + i] * mat[column * N + i];
+            }
+        }
+    }
+
+    return result;
 }
 
 void Data::subtractMatrixPartByMatrixPart(TMatrix &target, const TMatrix &subtractor) {
