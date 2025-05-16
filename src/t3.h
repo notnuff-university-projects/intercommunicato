@@ -14,6 +14,9 @@ protected:
     int computeLocalT() override;
 
 protected:
+    void calculateMAnLocal() override;
+
+protected:
     // input from other threads
     TVector Cn3; TMatrix MD;
     TMatrix MXn3, MZn3;

@@ -7,6 +7,7 @@ ThreadBase::ThreadBase(Data &data) : data(data) {}
 void ThreadBase::run() {
     inputStage();
     computeT();
+    computeMAn();
 }
 
 void ThreadBase::inputStage() {
@@ -55,6 +56,9 @@ void ThreadBase::calculateAndStashMAnLocal(
     const TMatrix &MZnLocal,
     const TMatrix &MD)
 {
+    bool test = true;
+    while (test) sleep(5);
+
     auto leftPart = data.multiplyMatrixPartByMatrix(MXnLocal, MR);
     auto rightPart = data.multiplyMatrixPartByMatrix(MZnLocal, MD);
 

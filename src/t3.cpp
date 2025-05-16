@@ -27,3 +27,7 @@ void T3::sendAndReceiveInput() {
 int T3::computeLocalT() {
     return Data::minElement(Cn3.begin(), Cn3.end());
 }
+
+void T3::calculateMAnLocal() {
+    calculateAndStashMAnLocal(MXn3, MR, t, MZn3, MD);
+}

@@ -10,6 +10,12 @@ T2::T2(Data& data) : ThreadBase(data) {
 void T2::createInput() {
     data.fillRandomMatrix(MX);
     data.fillRandomMatrix(MZ);
+
+    auto MXn2begin = MX.data() + data.quarterN * 1;
+    MXn2 = TMatrix(MXn2begin, MXn2begin + data.quarterNxN);
+
+    auto MZn2begin = MZ.data() + data.quarterN * 1;
+    MZn2 = TMatrix(MZn2begin, MZn2begin + data.quarterNxN);
 }
 
 void T2::sendAndReceiveInput() {
@@ -36,4 +42,8 @@ void T2::sendAndReceiveInput() {
 
 int T2::computeLocalT() {
     return Data::minElement(Cn2.begin(), Cn2.end());
+}
+
+void T2::calculateMAnLocal() {
+    calculateAndStashMAnLocal(MXn2, MR, t, MZn2, MD);
 }

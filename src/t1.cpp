@@ -46,3 +46,7 @@ int T1::computeLocalT() {
     return Data::minElement(C.begin(), C.begin() + data.quarterN);
 }
 
+void T1::calculateMAnLocal() {
+    calculateAndStashMAnLocal(MXn1, MR, t, MZn1, MD);
+}
+

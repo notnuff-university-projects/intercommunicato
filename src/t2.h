@@ -15,8 +15,12 @@ protected:
     int computeLocalT() override;
 
 protected:
+    void calculateMAnLocal() override;
+
+protected:
     // input
     TMatrix MX, MZ;
+    TMatrix MXn2, MZn2;
 
     // input from other threads
     TVector Cn2; TMatrix MD;

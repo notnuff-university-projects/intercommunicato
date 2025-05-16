@@ -15,6 +15,9 @@ protected:
     int computeLocalT() override;
 
 protected:
+    void calculateMAnLocal() override;
+
+protected:
     // input
     TMatrix MR;
 

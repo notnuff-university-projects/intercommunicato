@@ -15,7 +15,7 @@ protected:
     int computeLocalT() override;
 
 protected:
-    void computeMAn();
+    void calculateMAnLocal() override;
 
 protected:
     // input

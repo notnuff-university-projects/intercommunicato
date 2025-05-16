@@ -35,3 +35,7 @@ void T4::sendAndReceiveInput() {
 int T4::computeLocalT() {
     return Data::minElement(Cn4.begin(), Cn4.end());
 }
+
+void T4::calculateMAnLocal() {
+    calculateAndStashMAnLocal(MXn4, MR, t, MZn4, MD);
+}

@@ -21,8 +21,6 @@ public:
 
 public:
     // Допоміжні методи
-
-    static TVector addVectors(const TVector& v1, const TVector& v2);
     static int minElement(TVector::iterator begin, TVector::iterator end);
 
     // оскільки
