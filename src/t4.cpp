@@ -26,10 +26,6 @@ void T4::sendAndReceiveInput() {
     MPI_Send(MR.data(), data.NxN, MPI_INT, 0, 1, MPI_COMM_WORLD);
     MPI_Send(MR.data(), data.NxN, MPI_INT, 1, 1, MPI_COMM_WORLD);
     MPI_Send(MR.data(), data.NxN, MPI_INT, 2, 1, MPI_COMM_WORLD);
-
-
-    std::cout << "T4: send MR: " << MR[0] << std::endl;
-    std::cout << "T4: received MD: " << MD[0] << std::endl;
 }
 
 int T4::computeLocalT() {

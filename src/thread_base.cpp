@@ -8,6 +8,7 @@ void ThreadBase::run() {
     inputStage();
     computeT();
     computeMAn();
+
 }
 
 void ThreadBase::inputStage() {
@@ -31,9 +32,7 @@ void ThreadBase::computeT() {
     computeGlobalT(localT);
     syncT();
 
-    std::cout << name << ":\n"
-    << "localT: " << localT << std::endl
-    << "globalT: " << t << std::endl;
+    std::cout << name << ":\n";
 }
 
 void ThreadBase::computeGlobalT(int localT) {
@@ -46,7 +45,7 @@ void ThreadBase::syncT() {
 
 void ThreadBase::computeMAn() {
     calculateMAnLocal();
-    sendMAn();
+    sendMAn(nullptr);
 }
 
 void ThreadBase::calculateAndStashMAnLocal(
@@ -56,9 +55,6 @@ void ThreadBase::calculateAndStashMAnLocal(
     const TMatrix &MZnLocal,
     const TMatrix &MD)
 {
-    bool test = true;
-    while (test) sleep(5);
-
     auto leftPart = data.multiplyMatrixPartByMatrix(MXnLocal, MR);
     auto rightPart = data.multiplyMatrixPartByMatrix(MZnLocal, MD);
 
@@ -67,6 +63,10 @@ void ThreadBase::calculateAndStashMAnLocal(
     MAnLocal = std::move(leftPart);
 }
 
-void ThreadBase::sendMAn() {
-
+void ThreadBase::sendMAn(void *recBuffer) {
+    MPI_Gather(MAnLocal.data(), data.quarterNxN, MPI_INT,
+                recBuffer, data.quarterNxN, MPI_INT,
+                1, MPI_COMM_WORLD);
 }
+
+void ThreadBase::afterDone() {}

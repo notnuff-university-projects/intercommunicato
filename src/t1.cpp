@@ -36,10 +36,6 @@ void T1::sendAndReceiveInput() {
     MPI_Recv(MXn1.data(), data.quarterNxN, MPI_INT, 1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Recv(MZn1.data(), data.quarterNxN, MPI_INT, 1, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     MPI_Recv(MR.data(), data.NxN, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-    std::cout << "T1: send MD: " << MD[0] << std::endl;
-    std::cout << "T1: received MR: " << MR[0] << std::endl;
-
 }
 
 int T1::computeLocalT() {

@@ -35,6 +35,9 @@ public:
     }
 
 public:
+    void printMatrix(const TMatrix &mat);
+
+public:
     int GetRandomNumber();
 
 public:

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <climits>
+#include <iomanip>
 #include <iostream>
 #include <semaphore>
 
@@ -31,7 +32,6 @@ void Data::fillRandomMatrix(TMatrix &mat) {
 
 int Data::minElement(const TVector::iterator begin, const TVector::iterator end) {
     const auto min = std::ranges::min_element(begin, end);
-    std::cout << "MIN: " << *min << " " << *begin << " " << *end << std::endl;
     return *min;
 }
 
@@ -53,7 +53,7 @@ TMatrix Data::multiplyMatrixPartByMatrix(const TMatrix &matPart, const TMatrix &
                 const auto matIdx = matColumn + i * N;
                 matResult += matPart[matPartIdx] * mat[matIdx];
             }
-            result[matColumn * N + matPartRow] = matResult;
+            result[rowBegin + matColumn] = matResult;
         }
     }
 
@@ -64,6 +64,52 @@ void Data::subtractMatrixPartByMatrixPart(TMatrix &target, const TMatrix &subtra
     if (target.size() != subtractor.size()) throw std::invalid_argument("The target and subtractor must be the same size.");
     for (int i = 0; i < target.size(); ++i) {
         target[i] -= subtractor[i];
+    }
+}
+
+void Data::printMatrix(const TMatrix &mat) {
+    const int maxDisplay = 4;   // Number of rows/cols to show before/after '...'
+    const int cellWidth = 6;    // Fixed width per cell (including alignment)
+    const int rows = mat.size() / N;
+
+    auto formatCell = [&](int value) -> std::string {
+        std::ostringstream oss;
+        oss << value;
+        std::string str = oss.str();
+
+        if ((int)str.size() > cellWidth) {
+            return str.substr(0, cellWidth - 3) + "...";
+        } else {
+            std::ostringstream padded;
+            padded << std::setw(cellWidth) << str;
+            return padded.str();
+        }
+    };
+
+    auto printRow = [&](int rowIndex) {
+        for (int j = 0; j < N; ++j) {
+            if (j < maxDisplay || j >= N - maxDisplay) {
+                std::cout << formatCell(mat[rowIndex * N + j]) << " ";
+            } else if (j == maxDisplay) {
+                std::cout << std::setw(cellWidth) << "..." << " ";
+            }
+        }
+        std::cout << "\n";
+    };
+
+    for (int i = 0; i < rows; ++i) {
+        if (i < maxDisplay || i >= rows - maxDisplay) {
+            printRow(i);
+        } else if (i == maxDisplay) {
+            for (int j = 0; j < N; ++j) {
+                if (j < maxDisplay || j >= N - maxDisplay) {
+                    std::cout << std::setw(cellWidth) << "..." << " ";
+                } else if (j == maxDisplay) {
+                    std::cout << std::setw(cellWidth) << "..." << " ";
+                }
+            }
+            std::cout << "\n";
+        }
     }
 }
 

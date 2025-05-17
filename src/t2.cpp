@@ -4,7 +4,13 @@
 #include <semaphore>
 
 T2::T2(Data& data) : ThreadBase(data) {
+    startTime = std::chrono::high_resolution_clock::now();
+
     name = "T2";
+}
+
+T2::~T2() {
+
 }
 
 void T2::createInput() {
@@ -36,14 +42,28 @@ void T2::sendAndReceiveInput() {
     MPI_Send(MZ.data() + data.quarterN * 3, data.quarterNxN, MPI_INT, 3, 2, MPI_COMM_WORLD);
 
     MPI_Recv(MR.data(), data.NxN, MPI_INT, 3, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-    std::cout << "T2: received MD: " << MD[0] << std::endl;
 }
 
 int T2::computeLocalT() {
     return Data::minElement(Cn2.begin(), Cn2.end());
 }
 
+void T2::computeMAn() {
+    calculateMAnLocal();
+
+    MA.resize(data.NxN + 1);
+    sendMAn(MA.data());
+
+    data.printMatrix(MA);
+}
+
 void T2::calculateMAnLocal() {
     calculateAndStashMAnLocal(MXn2, MR, t, MZn2, MD);
+}
+
+void T2::afterDone() {
+    endTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
+    std::cout << "Час виконання: " << duration.count() << " мс" << std::endl;
 }

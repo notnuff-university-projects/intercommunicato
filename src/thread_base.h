@@ -38,7 +38,10 @@ protected:
         const TMatrix& MD
         );
 
-    void sendMAn();
+    void sendMAn(void *recBuffer);
+
+protected:
+    virtual void afterDone();
 
 protected:
     int t = std::numeric_limits<int>::max();

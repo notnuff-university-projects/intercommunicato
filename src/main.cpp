@@ -32,7 +32,6 @@ int main(int argc, char** argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
     Data data;
-    auto start = std::chrono::high_resolution_clock::now();
 
     std::unique_ptr<ThreadBase> currentThread;
 
@@ -60,12 +59,11 @@ int main(int argc, char** argv) {
 
     }
 
+    if (world_rank == 3) {
+        bool t = true;
+        while (t) sleep(5);
+    }
     currentThread->run();
-
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-    std::cout << "Час виконання: " << duration.count() << " мс" << std::endl;
 
     MPI_Finalize();
     return 0;
