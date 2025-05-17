@@ -64,12 +64,6 @@ int main(int argc, char** argv) {
             return EXIT_FAILURE;
     }
 
-    // Спеціальна обробка для четвертого потоку
-    if (world_rank == 3) {
-        bool t = true;
-        while (t) sleep(5);
-    }
-
     // Запуск обчислень
     currentThread->run();
 

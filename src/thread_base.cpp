@@ -10,6 +10,7 @@ void ThreadBase::run() {
     inputStage();     // Етап введення даних
     computeT();       // Етап обчислення t
     computeMAn();     // Етап обчислення MA
+    afterDone();
 }
 
 // Етап введення даних

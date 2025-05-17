@@ -10,7 +10,7 @@
 Data::Data() {
     // Ініціалізація генератора випадкових чисел
     gen.seed(std::time(nullptr));
-    dist = std::uniform_int_distribution<int>(5, 9); // Діапазон випадкових чисел: від 5 до 9
+    dist = std::uniform_int_distribution<int>(-10, 10); // Діапазон випадкових чисел: від 5 до 9
 }
 
 // Деструктор
